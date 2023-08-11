@@ -1,6 +1,6 @@
 require('dotenv').config();
 const { Sequelize } = require('sequelize');
-const { DB_USER, DB_PASSWORD, DB_HOST, DBB } = process.env;
+const { DB_USER, DB_PASSWORD, DB_HOST, DBB,PORT, DB_DEPLOY } = process.env;
 const UserModel = require("./models/User")
 const FavoriteModel = require("./models/Favorite")
 
@@ -9,8 +9,13 @@ const FavoriteModel = require("./models/Favorite")
 // Recuerda pasarle la información de tu archivo '.env'.
 
 // URL ----> postgres://DB_USER:DB_PASSWORD@DB_HOST/rickandmorty
+// const sequelize = new Sequelize(
+//    `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DBB}`,
+//    { logging: false, native: false }
+// );
+
 const sequelize = new Sequelize(
-   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DBB}`,
+   DB_DEPLOY,
    { logging: false, native: false }
 );
 
@@ -35,4 +40,5 @@ module.exports = {
    User,
    Favorite,
    conn: sequelize,
+   port: PORT
 };

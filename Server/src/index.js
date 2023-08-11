@@ -2,10 +2,11 @@ const express = require('express')
 const router = require('./routes/index')
 const morgan = require('morgan')
 const cors = require('cors')
-const { conn } = require('./DB_connection');
+const { conn, port } = require('./DB_connection');
+
 
 const server = express()
-const PORT = 3001;
+const PORT = port || 3001;
 
 server.use(morgan('dev'))
 server.use(cors())
